@@ -1,0 +1,7 @@
+.settings/
+build/
+.apt_src/
+target/
+.project
+.classpath
+.metadata
