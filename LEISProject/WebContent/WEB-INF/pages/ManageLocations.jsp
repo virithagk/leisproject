@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +9,7 @@
    <link rel="stylesheet" href="../css/styles.css">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="../js/script.js"></script>
-   <title>Add Manufacturer</title>
+   <title>Manage Locations</title>
 
 <style type="text/css">
 #mainWrapper {
@@ -81,19 +78,19 @@ background: #666633;
    </li>
    <li class='has-sub'><a href='#'><span>Admin Actions</span></a>
       <ul>
-        <li><a href='LEISProject/manufacturer/manageManufacturers'><span>Manage Manufacturers</span></a></li>
-         <li><a href='addEquipmentType.jsp'><span>Manage Equipment Types</span></a></li>
-         <li><a href='addFundingSource.jsp'><span>Manage Funding Sources</span></a></li>
-         <li><a href='addLocation.jsp'><span>Manage Locations</span></a></li>
-         <li><a href='addPlatformType.jsp'><span>Manage Platform Types</span></a></li>
-         <li><a href='addModel.jsp'><span>Manage Models</span></a></li>
+         <li><a href='ManageManufacturers.jsp'><span>Manage Manufacturers</span></a></li>
+         <li><a href='ManageEquipmentTypes.jsp'><span>Manage Equipment Types</span></a></li>
+         <li><a href='ManageFundingSources.jsp'><span>Manage Funding Sources</span></a></li>
+         <li><a href='ManageLocations.jsp'><span>Manage Locations</span></a></li>
+         <li><a href='ManagePlatformTypes.jsp'><span>Manage Platform Types</span></a></li>
+         <li><a href='ManageModels.jsp'><span>Manage Models</span></a></li>
          <li class='last'><a href='ManageStatus.jsp'><span>Manage Status</span></a></li>
       </ul>
    </li>
    <li class='has-sub'><a href='#'><span>User Actions</span></a>
       <ul>
-         <li><a href='#'><span>Manage Equipment</span></a></li>
-         <li class='last'><a href='#'><span>Generate Reports</span></a></li>
+         <li><a href='ManageEquipments.jsp'><span>Manage Equipment</span></a></li>
+         <li class='last'><a href='GenerateReports.jsp'><span>Generate Reports</span></a></li>
       </ul>
    </li>
 </ul>
@@ -102,63 +99,17 @@ background: #666633;
 </div>
 
 <div id='second'>
-<div><!--	
-	<h3> Add Manufacturer </h3>
+<div>	
+	<h3> Manage Locations </h3>
 
 	<form action="/LEISProject/manufacturer/submitAddManufacturer" method="post">
-		<p>
-			Manufacturer Name : <input type="text" name="manufacturerName" />
-		</p>
+		
+		<input type="button" value="Add" />
+		<input type="button" value="Remove" />
+		<input type="button" value="Update" />
 		
 		<input type="submit" value="Add" />
 	</form>
-
-
-
---><center>
-		<h2>Add New Manufacturer</h2>
-		
-		<form:form method="POST" action="/LEISProject/saveManufacturer.html">
-	   		<table>
-			    <!--<tr>
-			        <td><form:label path="manufacturerId">Manufacturer ID:</form:label></td>
-			        <td><form:input path="manufacturerId" readonly="true"/></td>
-			    </tr>
-			    --><tr>
-			        <td><form:label path="manufacturerName">Manufacturer Name:</form:label></td>
-			        <td><form:input path="manufacturerName" value="${manufacturer.manufacturerName}"/></td>
-			    </tr>
-			    
-			   	<tr>
-			    <tr>
-			    	<td>&nbsp;</td>
-			      <td><input type="submit" value="SAVE"/></td>
-		      	</tr>
-			</table> 
-		</form:form>
-		<br/>
-  <c:if test="${!empty manufacturers}">
-	<table align="center" border="1">
-		<tr>
-			<th>Manufacturer ID</th>
-			<th>Manufacturer Name</th>
-			<th>Options</th>
-		</tr>
-
-		<c:forEach items="${manufacturers}" var="manufacturer">
-			<tr>
-				<td><c:out value="${manufacturer.manufacturerId}"/></td>
-				<td><c:out value="${manufacturer.manufacturerName}"/></td>
-				<td align="center"><a href="editManufacturer?manufacturerId=${manufacturer.manufacturerId}">Edit</a> | <a href="deleteManufacturer.html?manufacturerId=${manufacturer.manufacturerId}">Delete</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-</c:if>
-<h2><a href="addPublication.html">Adding Publication</a></h2>
-
-	
-	
-	
 </div>
 </div>
 </div>

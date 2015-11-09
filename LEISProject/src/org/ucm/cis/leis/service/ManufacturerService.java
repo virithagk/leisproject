@@ -1,10 +1,10 @@
-package org.ucm.cis.leis.dao;
+package org.ucm.cis.leis.service;
 
 import java.util.List;
 
 import org.ucm.cis.leis.models.Manufacturer;
 
-public interface ManufacturerDao {
+public interface ManufacturerService {
 	
 	public void addManufacturer(Manufacturer manufacturer);
 	
@@ -13,4 +13,5 @@ public interface ManufacturerDao {
 	public Manufacturer getManufacturer(int manufacturerId);
 	
 	public void deleteManufacturer(int manufacturerId);
+
 }

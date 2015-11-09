@@ -2,6 +2,7 @@ package org.ucm.cis.leis.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,8 +13,12 @@ import javax.persistence.Table;
 public class Manufacturer {
 
 	@Id
+	@GeneratedValue
 	@Column(name="MF_ID")
 	private int manufacturerId;
+	
+	@Column(name="MF_NAME")
+	private String manufacturerName;
 	
 	public int getManufacturerId() {
 		return manufacturerId;
@@ -23,7 +28,7 @@ public class Manufacturer {
 		this.manufacturerId = manufacturerId;
 	}
 
-	@Column(name="MF_NAME")
+	
 	public String getManufacturerName() {
 		return manufacturerName;
 	}
@@ -31,6 +36,5 @@ public class Manufacturer {
 	public void setManufacturerName(String manufacturerName) {
 		this.manufacturerName = manufacturerName;
 	}
-
-	private String manufacturerName;
+	
 }
