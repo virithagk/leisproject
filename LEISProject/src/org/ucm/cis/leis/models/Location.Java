@@ -31,7 +31,7 @@ public class Location {
 		return roomNumber;
 	}
 
-	public void setRoomNumber(String roomNumber) {
+	public void setRoomNumber(int roomNumber) {
 		this.roomNumber = roomNumber;
 	}
 

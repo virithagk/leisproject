@@ -29,7 +29,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 	  
 	 
 	 public void deleteManufacturer(int ManufacturerId) {  
-	  sessionFactory.getCurrentSession().createQuery("DELETE FROM Manufacturer WHERE ManufacturerId = "+ManufacturerId).executeUpdate();  
+	  sessionFactory.getCurrentSession().createQuery("DELETE FROM Manufacturer WHERE MF_ID = "+ManufacturerId).executeUpdate();  
 	 }  
 
 }

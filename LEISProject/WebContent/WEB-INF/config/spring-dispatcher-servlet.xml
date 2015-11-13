@@ -53,11 +53,18 @@
 		<property name="suffix"> <value>.jsp</value> </property> </bean>
 	
 	--><bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
 				<value>org.ucm.cis.leis.models.Manufacturer</value>
+				<value>org.ucm.cis.leis.models.Equipment</value>
+				<value>org.ucm.cis.leis.models.EquipmentType</value>
+				<value>org.ucm.cis.leis.models.FundingSource</value>
+				<value>org.ucm.cis.leis.models.Location</value>
+				<value>org.ucm.cis.leis.models.Model</value>
+				<value>org.ucm.cis.leis.models.PlatformType</value>
+				<value>org.ucm.cis.leis.models.Status</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -75,7 +82,7 @@
 	</bean>
 	
 	--><bean id="hibernateTransactionManager"
-        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="dataSource" ref="dataSource" />
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>

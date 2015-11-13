@@ -13,16 +13,16 @@ public class EquipmentType {
 
 	@Id
 	@Column(name="TYPE_CODE")
-	private int typeCode;
+	private String typeCode;
 	
 	@Column(name="TYPE_NAME")
 	private String typeName;
 	
-	public int getTypeCode() {
+	public String getTypeCode() {
 		return typeCode;
 	}
 
-	public void setTypeCode(int typeCode) {
+	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
 	}
 

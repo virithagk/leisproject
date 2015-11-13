@@ -12,7 +12,7 @@
    <link rel="stylesheet" href="../css/styles.css">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="../js/script.js"></script>
-   <title>Add Manufacturer</title>
+   <title>Manage Manufacturers</title>
 
 <style type="text/css">
 #mainWrapper {
@@ -81,13 +81,13 @@ background: #666633;
    </li>
    <li class='has-sub'><a href='#'><span>Admin Actions</span></a>
       <ul>
-        <li><a href='LEISProject/manufacturer/manageManufacturers'><span>Manage Manufacturers</span></a></li>
-         <li><a href='addEquipmentType.jsp'><span>Manage Equipment Types</span></a></li>
-         <li><a href='addFundingSource.jsp'><span>Manage Funding Sources</span></a></li>
-         <li><a href='addLocation.jsp'><span>Manage Locations</span></a></li>
-         <li><a href='addPlatformType.jsp'><span>Manage Platform Types</span></a></li>
-         <li><a href='addModel.jsp'><span>Manage Models</span></a></li>
-         <li class='last'><a href='ManageStatus.jsp'><span>Manage Status</span></a></li>
+        <li><a href='addManufacturer.html'><span>Manage Manufacturers</span></a></li>
+         <li><a href='addEquipmentType.html'><span>Manage Equipment Types</span></a></li>
+         <li><a href='addFundingSource.html'><span>Manage Funding Sources</span></a></li>
+         <li><a href='addLocation.html'><span>Manage Locations</span></a></li>
+         <li><a href='addPlatformType.html'><span>Manage Platform Types</span></a></li>
+         <li><a href='addModel.html'><span>Manage Models</span></a></li>
+         <li class='last'><a href='addStatus.html'><span>Manage Status</span></a></li>
       </ul>
    </li>
    <li class='has-sub'><a href='#'><span>User Actions</span></a>
@@ -102,20 +102,8 @@ background: #666633;
 </div>
 
 <div id='second'>
-<div><!--	
-	<h3> Add Manufacturer </h3>
-
-	<form action="/LEISProject/manufacturer/submitAddManufacturer" method="post">
-		<p>
-			Manufacturer Name : <input type="text" name="manufacturerName" />
-		</p>
-		
-		<input type="submit" value="Add" />
-	</form>
-
-
-
---><center>
+<div>
+<center>
 		<h2>Add New Manufacturer</h2>
 		
 		<form:form method="POST" action="/LEISProject/saveManufacturer.html">
@@ -149,15 +137,11 @@ background: #666633;
 			<tr>
 				<td><c:out value="${manufacturer.manufacturerId}"/></td>
 				<td><c:out value="${manufacturer.manufacturerName}"/></td>
-				<td align="center"><a href="editManufacturer?manufacturerId=${manufacturer.manufacturerId}">Edit</a> | <a href="deleteManufacturer.html?manufacturerId=${manufacturer.manufacturerId}">Delete</a></td>
+				<td align="center"><a href="editManufacturer.html?manufacturerId=${manufacturer.manufacturerId}">Edit</a> | <a href="deleteManufacturer.html?manufacturerId=${manufacturer.manufacturerId}">Delete</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 </c:if>
-<h2><a href="addPublication.html">Adding Publication</a></h2>
-
-	
-	
 	
 </div>
 </div>
