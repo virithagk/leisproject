@@ -12,8 +12,8 @@ public interface StatusService {
 	
 	public List<Status> getStatuses();
 	
-	public Status getStatus(int statusCode);
+	public Status getStatus(String statusCode);
 	
-	public void deleteStatus(int statusCode);
+	public void deleteStatus(String statusCode);
 
 }

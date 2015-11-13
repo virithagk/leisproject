@@ -11,16 +11,16 @@ public class PlatformType {
 
 	@Id
 	@Column(name = "PLATFORM_CODE")
-	private int platformCode;
+	private String platformCode;
 
 	@Column(name = "PLATFORM_NAME")
 	private String platformName;
 
-	public int getPlatformCode() {
+	public String getPlatformCode() {
 		return platformCode;
 	}
 
-	public void setPlatformCode(int platformCode) {
+	public void setPlatformCode(String platformCode) {
 		this.platformCode = platformCode;
 	}
 

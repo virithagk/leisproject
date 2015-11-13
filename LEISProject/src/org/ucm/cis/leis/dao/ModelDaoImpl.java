@@ -28,17 +28,17 @@ public class ModelDaoImpl implements ModelDao {
 	}
 
 	@Override
-	public Model getModel(int modelCode) {
+	public Model getModel(String modelCode) {
 		return (Model) sessionFactory.getCurrentSession().get(Model.class,
 				modelCode);
 	}
 
 	@Override
-	public void deleteModel(int modelCode) {
+	public void deleteModel(String modelCode) {
 
 		sessionFactory
 				.getCurrentSession()
-				.createQuery("DELETE FROM Model WHERE ModelCode = " + modelCode)
+				.createQuery("DELETE FROM Model WHERE MD_CODE = '" + modelCode+"'")
 				.executeUpdate();
 	}
 

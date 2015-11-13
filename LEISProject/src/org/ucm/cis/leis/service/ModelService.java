@@ -10,7 +10,7 @@ public void addModel(Model model);
 	
 	public List<Model> getModels();
 	
-	public Model getModel(int modelCode);
+	public Model getModel(String modelCode);
 	
-	public void deleteModel(int modelCode);
+	public void deleteModel(String modelCode);
 }

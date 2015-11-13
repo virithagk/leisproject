@@ -26,18 +26,18 @@ public class StatusDaoImpl implements StatusDao {
 	}
 
 	@Override
-	public Status getStatus(int statusCode) {
+	public Status getStatus(String statusCode) {
 
 		return (Status) sessionFactory.getCurrentSession().get(Status.class,
 				statusCode);
 	}
 
 	@Override
-	public void deleteStatus(int statusCode) {
+	public void deleteStatus(String statusCode) {
 		sessionFactory
 				.getCurrentSession()
 				.createQuery(
-						"DELETE FROM Status WHERE statusCode = " + statusCode)
+						"DELETE FROM Status WHERE STATUS_CODE = '" + statusCode+"'")
 				.executeUpdate();
 
 	}

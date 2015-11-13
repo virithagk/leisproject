@@ -22,40 +22,40 @@ public class ModelController {
 	private ModelService modelService;
 	
 	@RequestMapping(value = "/saveModel", method = RequestMethod.POST)
-	public ModelAndView saveModel(@ModelAttribute("command") Model aModel, 
+	public ModelAndView saveModel(@ModelAttribute("command") Model model, 
 			BindingResult result) {
-		modelService.addModel(aModel);
+		modelService.addModel(model);
 		return new ModelAndView("redirect:/addModel.html");
 	}
 	
 	@RequestMapping(value = "/addModel", method = RequestMethod.GET)
-	public ModelAndView addModel(@ModelAttribute("command")  Model aModel,
+	public ModelAndView addModel(@ModelAttribute("command")  Model model,
 			BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("aModel",  modelService.getModels());
-		return new ModelAndView("addModel", model);
+		Map<String, Object> model1 = new HashMap<String, Object>();
+		model1.put("models",  modelService.getModels());
+		return new ModelAndView("addModel", model1);
 	}
 	
 	@RequestMapping(value = "/deleteModel", method = RequestMethod.GET)
-	public ModelAndView deleteModel(@ModelAttribute("command")  Model aModel,
+	public ModelAndView deleteModel(@ModelAttribute("command")  Model model,
 			BindingResult result) {
-		modelService.deleteModel(aModel.getModelCode());
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("aModel",  modelService.getModels());
-		return new ModelAndView("addModel", model);
+		modelService.deleteModel(model.getModelCode());
+		Map<String, Object> model1 = new HashMap<String, Object>();
+		model1.put("models",  modelService.getModels());
+		return new ModelAndView("addModel", model1);
 	}
 	
 	@RequestMapping(value = "/editModel", method = RequestMethod.GET)
-	public ModelAndView editModel(@ModelAttribute("command")  Model aModel,
+	public ModelAndView editModel(@ModelAttribute("command")  Model model,
 			BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("aModel",  modelService.getModel(aModel.getModelCode()));
-		model.put("aModel",  modelService.getModels());
-		return new ModelAndView("addModel", model);
+		Map<String, Object> model1 = new HashMap<String, Object>();
+		model1.put("model",  modelService.getModel(model.getModelCode()));
+		model1.put("models",  modelService.getModels());
+		return new ModelAndView("addModel", model1);
 	}
 	
-	@RequestMapping(value="/aModel", method = RequestMethod.GET)
-	public List<Model> getModel() {
+	@RequestMapping(value="/models", method = RequestMethod.GET)
+	public List<Model> getModels() {
 		return modelService.getModels();
 	}
 }

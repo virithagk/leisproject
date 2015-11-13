@@ -10,9 +10,9 @@ public interface ModelDao {
 
 	List<Model> getModels();
 
-	Model getModel(int modelCode);
+	Model getModel(String modelCode);
 
-	void deleteModel(int modelCode);
+	void deleteModel(String modelCode);
 
 	
 

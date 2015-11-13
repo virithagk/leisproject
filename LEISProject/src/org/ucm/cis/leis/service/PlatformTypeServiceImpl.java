@@ -33,12 +33,12 @@ public class PlatformTypeServiceImpl implements PlatformTypeService{
 	}
 
 	@Override
-	public PlatformType getPlatformType(int platformCode) {
+	public PlatformType getPlatformType(String platformCode) {
 		return platformTypeDao.getPlatformType(platformCode);
 	}
 
 	@Override
-	public void deletePlatformType(int platformCode) {
+	public void deletePlatformType(String platformCode) {
 		platformTypeDao.deletePlatformType(platformCode);
 	}
 

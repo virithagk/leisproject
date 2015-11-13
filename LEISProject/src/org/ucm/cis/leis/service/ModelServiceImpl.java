@@ -29,12 +29,12 @@ public class ModelServiceImpl implements ModelService{
 	}
 
 	@Override
-	public Model getModel(int modelCode) {
+	public Model getModel(String modelCode) {
 		return modelDao.getModel(modelCode);
 	}
 
 	@Override
-	public void deleteModel(int modelCode) {
+	public void deleteModel(String modelCode) {
 		
 		modelDao.deleteModel(modelCode);
 	}

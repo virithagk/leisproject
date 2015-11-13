@@ -28,18 +28,18 @@ public class PlatformTypeDaoImpl implements PlatformTypeDao {
 	}
 
 	@Override
-	public PlatformType getPlatformType(int platformCode) {
+	public PlatformType getPlatformType(String platformCode) {
 		return (PlatformType) sessionFactory.getCurrentSession().get(
 				PlatformType.class, platformCode);
 	}
 
 	@Override
-	public void deletePlatformType(int platformCode) {
+	public void deletePlatformType(String platformCode) {
 		sessionFactory
 				.getCurrentSession()
 				.createQuery(
-						"DELETE FROM PlatformType WHERE PLATFORM_CODE = "
-								+ platformCode).executeUpdate();
+						"DELETE FROM PlatformType WHERE PLATFORM_CODE = '"
+								+ platformCode+"'").executeUpdate();
 
 	}
 

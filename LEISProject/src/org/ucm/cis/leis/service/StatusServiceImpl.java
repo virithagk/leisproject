@@ -29,12 +29,12 @@ public class StatusServiceImpl implements StatusService{
 	}
 
 	@Override
-	public Status getStatus(int statusCode) {
+	public Status getStatus(String statusCode) {
 		return statusDao.getStatus(statusCode);
 	}
 
 	@Override
-	public void deleteStatus(int statusCode) {
+	public void deleteStatus(String statusCode) {
 		statusDao.deleteStatus(statusCode);
 	}
 

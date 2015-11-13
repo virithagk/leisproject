@@ -10,8 +10,8 @@ public interface PlatformTypeService {
 	
 	public List<PlatformType> getPlatformTypes();
 	
-	public PlatformType getPlatformType(int platformCode);
+	public PlatformType getPlatformType(String platformCode);
 	
-	public void deletePlatformType(int platformCode);
+	public void deletePlatformType(String platformCode);
 
 }

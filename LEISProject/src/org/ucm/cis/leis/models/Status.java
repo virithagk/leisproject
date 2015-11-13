@@ -13,16 +13,16 @@ public class Status {
 
 	@Id
 	@Column(name="STATUS_CODE")
-	private int statusCode;
+	private String statusCode;
 	
 	@Column(name="STATUS_NAME")
 	private String statusName;
 
-	public int getStatusCode() {
+	public String getStatusCode() {
 		return statusCode;
 	}
 
-	public void setStatusCode(int statusCode) {
+	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
 	}
 

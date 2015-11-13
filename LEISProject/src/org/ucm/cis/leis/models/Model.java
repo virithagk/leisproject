@@ -11,16 +11,16 @@ public class Model {
 
 	@Id
 	@Column(name = "MD_CODE")
-	private int modelCode;
+	private String modelCode;
 
 	@Column(name = "MD_NAME")
 	private String modelName;
 
-	public int getModelCode() {
+	public String getModelCode() {
 		return modelCode;
 	}
 
-	public void setModelCode(int modelCode) {
+	public void setModelCode(String modelCode) {
 		this.modelCode = modelCode;
 	}
 
