@@ -16,7 +16,7 @@
    <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
    <script src="<c:url value="/resources/js/script.js" />"></script>
     
-   <title>Manage Platform Types</title>
+   <title>Manage Users</title>
 
 <style type="text/css">
 #mainWrapper {
@@ -87,10 +87,11 @@ background: #666633;
 
 <div id='mainWrapper'>
 <div>
-<h1>${headerMessage}</h1>
+<h3 align="right">Welcome ${loginObj.userName} ${loginObj.role} | Logout</h3>
 </div>
 <div id='wrapper'>
 <div id='first'>
+
 
 				<div id='cssmenu'>
 					<ul>
@@ -102,10 +103,13 @@ background: #666633;
 								<!-- <li><a href='#'><span>My Profile</span></a></li> -->
 								<li><a href='changePassword.html'><span>Change my Password</span></a></li>
 								<li><span></span></li>
+								<c:if test="${loginObj.role eq 'Admin'}">
 								<li><a href='manageUsers.html'><span>Manage Users</span></a></li>
+								</c:if>
 								<!-- <li class='last'><a href='#'><span>Reset User
 											Password</span></a></li> -->
 							</ul></li>
+							<c:if test="${loginObj.role eq 'Admin'}">
 						<li class='has-sub'><a href='#'><span>Admin
 									Actions</span></a>
 							<ul>
@@ -123,6 +127,7 @@ background: #666633;
 								<li class='last'><a href='addStatus.html'><span>Manage
 											Status</span></a></li>
 							</ul></li>
+							</c:if>
 						<li class='has-sub'><a href='#'><span>User Actions</span></a>
 							<ul>
 								<li><a href='addEquipment.html'><span>Manage
@@ -136,46 +141,58 @@ background: #666633;
 
 <div id='second'>
 <div id='inputWrapper'>
-<div>
 <center>
-		<h2>Add New Platform Type</h2>
+		<h2>Add New User</h2>
 		
-		<form:form method="POST" action="/LEISProject/savePlatformType.html">
+		<form:form method="POST" action="/LEISProject/saveLogin.html">
 	   		<table>
 			    <tr>
-			        <td><form:label path="platformCode">Platform Type Code:</form:label></td>
-			        <td><form:input path="platformCode" readonly="false"/></td>
+			        <td><form:label path="userName">Username:</form:label></td>
+			        <td><form:input path="userName" value="${login.userName}" readonly="false"/></td>
 			    </tr>
 			    <tr>
-			        <td><form:label path="platformName">Platform Type Name:</form:label></td>
-			        <td><form:input path="platformName" value="${platformType.platformName}"/></td>
+			        <td><form:label path="password">Password:</form:label></td>
+			        <td><form:input type="password" path="password" value="${login.password}"/></td>
 			    </tr>
-			    
+			    <tr>
+			        <td><form:label path="role">Role:</form:label></td>
+			        
+			        <td>  
+		         <form:select path="role" cssStyle="width: 150px;" ${login.role}>      
+		       			<option value="-1">--Select Role--</option>
+		        		<option value="Lab Technician">Lab Technician</option>
+		        		<option value="Admin">Admin</option>
+		      	 </form:select>  
+					</td>
+			    </tr>
 			   	<tr>
 			    <tr>
 			    	<td>&nbsp;</td>
-			      <td><input type="submit" value="SAVE"/></td>
+			      <td><input type="submit" value="Save"/></td>
 		      	</tr>
 			</table> 
-		</form:form></center></div>
+		</form:form>
 		<br/>
-  <c:if test="${!empty platformTypes}">
-  							<div class="container">
+  <c:if test="${!empty logins}">
+							<div class="container">
 
 								<table id="example" class="display" cellspacing="0" width="100%" align="center">
 									<thead>
+
 		<tr>
-			<th>Platform Type Code</th>
-			<th>Platform Type Name</th>
+			<th>UserName</th>
+			<th>Password</th>
+			<th>Role</th>
 			<th>Options</th>
 		</tr>
 </thead>
 <tbody>
-		<c:forEach items="${platformTypes}" var="platformType">
+		<c:forEach items="${logins}" var="login">
 			<tr>
-				<td><c:out value="${platformType.platformCode}"/></td>
-				<td><c:out value="${platformType.platformName}"/></td>
-				<td align="center"><a href="editPlatformType.html?platformCode=${platformType.platformCode}">Edit</a> | <a href="deletePlatformType.html?platformCode=${platformType.platformCode}">Delete</a></td>
+				<td><c:out value="${login.userName}"/></td>
+				<td><c:out value="${login.password}"/></td>
+				<td><c:out value="${login.role}"/></td>
+				<td align="center"><a href="editLogin.html?userName=${login.userName}">Edit</a> | <a href="deleteLogin.html?userName=${login.userName}">Delete</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>

@@ -2,6 +2,9 @@
 <web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">  
 
   	<display-name>LEISProject</display-name>
+  <welcome-file-list>
+		<welcome-file>showLogin.html</welcome-file>
+	</welcome-file-list>
   
   <servlet>
     <servlet-name>spring-dispatcher</servlet-name>
@@ -10,7 +13,7 @@
         </servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/config/spring-dispatcher-servlet.xml</param-value>
+            <param-value>/WEB-INF/spring-dispatcher-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
   </servlet>
@@ -20,10 +23,5 @@
   </servlet-mapping>
 
 
-	<!--<welcome-file-list>
-		<welcome-file>
-			manageManufacturers.html
-		</welcome-file>
-	</welcome-file-list>
--->
+	
 </web-app>

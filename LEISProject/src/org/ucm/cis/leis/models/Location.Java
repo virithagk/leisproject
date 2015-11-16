@@ -16,7 +16,7 @@ public class Location {
 	private int roomId;
 	
 	@Column(name="ROOM_NO")
-	private int roomNumber;
+	private String roomName;
 	
 	public int getRoomId() {
 		return roomId;
@@ -27,12 +27,12 @@ public class Location {
 	}
 
 	
-	public int getRoomNumber() {
-		return roomNumber;
+	public String getRoomName() {
+		return roomName;
 	}
 
-	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 
 	

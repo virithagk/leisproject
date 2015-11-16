@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,14 +25,14 @@ public class PlatformTypeController {
 	
 	@RequestMapping(value = "/savePlatformType", method = RequestMethod.POST)
 	public ModelAndView savePlatformType(@ModelAttribute("command") PlatformType platformType, 
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		platformTypeService.addPlatformType(platformType);
 		return new ModelAndView("redirect:/addPlatformType.html");
 	}
 	
 	@RequestMapping(value = "/addPlatformType", method = RequestMethod.GET)
 	public ModelAndView addPlatformType(@ModelAttribute("command")  PlatformType platformType,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("platformTypes",  platformTypeService.getPlatformTypes());
 		return new ModelAndView("addPlatformType", model);
@@ -38,7 +40,7 @@ public class PlatformTypeController {
 	
 	@RequestMapping(value = "/deletePlatformType", method = RequestMethod.GET)
 	public ModelAndView deletePlatformType(@ModelAttribute("command")  PlatformType platformType,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		platformTypeService.deletePlatformType(platformType.getPlatformCode());
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("platformTypes",  platformTypeService.getPlatformTypes());
@@ -47,7 +49,7 @@ public class PlatformTypeController {
 	
 	@RequestMapping(value = "/editPlatformType", method = RequestMethod.GET)
 	public ModelAndView editPlatformType(@ModelAttribute("command")  PlatformType platformType,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("platformType",  platformTypeService.getPlatformType(platformType.getPlatformCode()));
 		model.put("platformTypes",  platformTypeService.getPlatformTypes());

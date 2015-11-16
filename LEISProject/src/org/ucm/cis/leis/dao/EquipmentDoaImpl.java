@@ -32,7 +32,7 @@ public class EquipmentDoaImpl implements EquipmentDao {
 
 	@Override
 	public void deleteEquipment(int equipmentId) {
-		 sessionFactory.getCurrentSession().createQuery("DELETE FROM Equipment WHERE EquipmentId = "+equipmentId).executeUpdate();
+		 sessionFactory.getCurrentSession().createQuery("DELETE FROM Equipment WHERE EQUIPMENT_ID = "+equipmentId).executeUpdate();
 	}
 
 }

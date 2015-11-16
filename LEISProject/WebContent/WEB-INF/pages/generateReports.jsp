@@ -20,16 +20,16 @@
 <script src="<c:url value="/resources/js/datetimepicker.js" />"></script>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-<title>Manage Equipments</title>
+<title>Generate Reports</title>
 
 <style type="text/css">
 #mainWrapper {
 	width: 90%;
 	height: 90%;
-	margin-top: 1%;
+	margin-top: 5%;
 	margin-bottom: 5%;
 	margin-left: 5%;
-	margin-right: 98%;
+	margin-right: 95%;
 	border-radius: 25px;
 	background-color: #FFE8BB;
 	border: 1px solid #FFE8BB;
@@ -85,6 +85,24 @@
 <script type="text/javascript"
 	src="<c:url value="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.js" />"></script>
 <script type="text/javascript" charset="utf-8">
+
+function filterGlobal () {
+    $('#example').DataTable().search(
+        $('#global_filter').val(),
+        $('#global_regex').prop('checked'),
+        $('#global_smart').prop('checked')
+    ).draw();
+}
+ 
+function filterColumn ( i ) {
+    $('#example').DataTable().column( i ).search(
+        $('#col'+i+'_filter').val(),
+        $('#col'+i+'_regex').prop('checked'),
+        $('#col'+i+'_smart').prop('checked')
+    ).draw();
+}
+ 
+
 	/* Custom filtering function which will search data in column four between two values */
 	$.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
 		var min = parseInt($('#min').val(), 10);
@@ -106,6 +124,14 @@
         "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
         "iDisplayLength": 5
 		});
+
+ $('input.global_filter').on( 'keyup click', function () {
+        filterGlobal();
+    } );
+ 
+    $('input.column_filter').on( 'keyup click', function () {
+        filterColumn( $(this).parents('tr').attr('data-column') );
+    } );
 		
 		$('a.toggle-vis').on('click', function(e) {
 			e.preventDefault();
@@ -133,22 +159,7 @@
 </head>
 
 <body bgcolor='#B45353'>
-<center>
-<table width="100%" style="margin-left: 90px; margin-right: 60%" >
-<tr>
-	<td width="10%" bgcolor="#FFE8BB">
-		<img src="<c:url value="/resources/images/UCM.jpg" />" height="170px" width="170px" alt="UCMO"></td>
-		<td width="80%"bgcolor="#FFE8BB">
-		<h1 align="left"><font face="Verdana" color="#C0152B">Lab Equipment Inventory System</font></h1>
-		
-	<h4 align="right">
-	<font face="Verdana" color="#C0152B">Welcome ${curLogin.userName} ${curLogin.role} | <a href="showLogin.html">Logout</a></font>
-	</h4>
-	</td> </tr>
-	
-</tr>
-</table>
-</center>
+
 	<div id='mainWrapper'>
 		<div>
 			<h1>${headerMessage}</h1>
@@ -196,196 +207,69 @@
 							</ul></li>
 					</ul>
 				</div>
-
 			</div>
 
 			<div id='second'>
 				<div id='inputWrapper'>
-					<h2>Add New Equipment</h2>
+					<h2>Search</h2>
+<table cellpadding="2" cellspacing="0" border="0" style="width: 100%; margin: 0 auto 2em auto;">
+        <thead>
+            <tr>
+                <th align ="left">Search Criteria</th>
+                <th align ="left">Search Text</th>
+                <!-- <th>Treat as regex</th>
+                <th>Use smart search</th> -->
+            </tr>
+<tr><td></td></tr>
+        </thead>
+        <tbody>
+            <tr id="filter_global">
+                <td>Global search</td>
+                <td align="center"><input type="text" class="global_filter" id="global_filter"></td>
+<!--                 <td align="center"><input type="checkbox" class="global_filter" id="global_regex"></td>
+                <td align="center"><input type="checkbox" class="global_filter" id="global_smart" checked="checked"></td> -->
+            </tr>
+            <tr id="filter_col1" data-column="16">
+                <td>Room Number</td>
+                <td align="center"><input type="text" class="column_filter" id="col0_filter"></td>
+                <!-- <td align="center"><input type="checkbox" class="column_filter" id="col0_regex"></td>
+                <td align="center"><input type="checkbox" class="column_filter" id="col0_smart" checked="checked"></td> -->
+            </tr>
+            <tr id="filter_col2" data-column="6">
+                <td>CIS Inventory Number</td>
+                <td align="center"><input type="text" class="column_filter" id="col1_filter"></td>
+              <!--   <td align="center"><input type="checkbox" class="column_filter" id="col1_regex"></td>
+                <td align="center"><input type="checkbox" class="column_filter" id="col1_smart" checked="checked"></td>
+            --> </tr>
+            <tr id="filter_col3" data-column="5">
+                <td>UCM Inventory Number</td>
+                <td align="center"><input type="text" class="column_filter" id="col2_filter"></td>
+               <!--  <td align="center"><input type="checkbox" class="column_filter" id="col2_regex"></td>
+                <td align="center"><input type="checkbox" class="column_filter" id="col2_smart" checked="checked"></td>
+            --> </tr>
+            <tr id="filter_col4" data-column="4">
+                <td>Serial Number</td>
+                <td align="center"><input type="text" class="column_filter" id="col3_filter"></td>
+              <!--   <td align="center"><input type="checkbox" class="column_filter" id="col3_regex"></td>
+                <td align="center"><input type="checkbox" class="column_filter" id="col3_smart" checked="checked"></td>
+            --> </tr>
+            <tr id="filter_col5" data-column="1">
+                <td>Manufacturer Name</td>
+                <td align="center"><input type="text" class="column_filter" id="col4_filter"></td>
+               <!--  <td align="center"><input type="checkbox" class="column_filter" id="col4_regex"></td>
+                <td align="center"><input type="checkbox" class="column_filter" id="col4_smart" checked="checked"></td>
+            --> </tr>
+            <tr id="filter_col6" data-column="3">
+                <td>Model Name</td>
+                <td align="center"><input type="text" class="column_filter" id="col5_filter"></td>
+              <!--   <td align="center"><input type="checkbox" class="column_filter" id="col5_regex"></td>
+                <td align="center"><input type="checkbox" class="column_filter" id="col5_smart" checked="checked"></td>
+            --> </tr></b>
+        </tbody>
+    </table>
 
-					<form:form method="POST" action="/LEISProject/saveEquipment.html">
-						<table>
-							<tr>
-								<td><form:label path="manufacturer.manufacturerId">Manufacturer Id:</form:label></td>
-								<td><form:select path="manufacturer.manufacturerId"
-										cssStyle="width: 210px;">
-										<option value="-1">--Select a Manufacturer--</option>
-										<c:forEach items="${manufacturers}" var="manufacturer">
-											<option value="${manufacturer.manufacturerId}">${manufacturer.manufacturerName}</option>
-										</c:forEach>
-									</form:select></td>
-								<!-- </tr>
-			    <tr> -->
-								<td><form:label path="equipmentType.typeCode">Equipment Type Code:</form:label></td>
-
-								<td><form:select path="equipmentType.typeCode"
-										cssStyle="width: 210px;">
-										<option value="-1">--Select an Equipment Type--</option>
-										<c:forEach items="${equipmentTypes}" var="equipmentType">
-											<option value="${equipmentType.typeCode}">${equipmentType.typeName}</option>
-										</c:forEach>
-									</form:select></td>
-								<!--  </tr>
-
-				<tr> -->
-								<td><form:label path="model.modelCode">Model Code:</form:label></td>
-								<td><form:select path="model.modelCode"
-										cssStyle="width: 210px;">
-										<option value="-1">--Select a Model--</option>
-										<c:forEach items="${models}" var="model">
-											<option value="${model.modelCode}">${model.modelName}</option>
-										</c:forEach>
-									</form:select></td>
-							</tr>
-							<tr>
-								<td><form:label path="serialNumber">Serial Number:</form:label></td>
-								<td><form:input path="serialNumber"
-										value="${equipment.serialNumber}" cssStyle="width: 205px;" /></td>
-								<!-- </tr>
-				
-				<tr> -->
-								<td><form:label path="ucmInventoryNo">UCM Inventory Number:</form:label></td>
-								<td><form:input path="ucmInventoryNo"
-										value="${equipment.ucmInventoryNo}" cssStyle="width: 205px;" /></td>
-								<!-- </tr>
-			    <tr> -->
-								<td><form:label path="cisInventoryNo">CIS Inventory Number :</form:label></td>
-								<td><form:input path="cisInventoryNo"
-										value="${equipment.cisInventoryNo}" cssStyle="width: 205px;" /></td>
-							</tr>
-
-							<tr>
-								<td><form:label path="dateInstalled">Date Installed:</form:label></td>
-
-								<td><form:input path="dateInstalled" id="dateInstalled"
-										type="text" size="25" value="${equipment.dateInstalled}" /> <a
-									href="javascript:NewCal('dateInstalled','ddmmyyyy')"> <img
-										src="<c:url value="/resources/images/cal.gif" />" width="16"
-										height="16" border="0" alt="Pick a date">
-								</a></td>
-
-								<%-- <td align="left">
-			      	<form:errors path="dateInstalled" cssStyle="color:red"></form:errors>
-			      </td>   --%>
-
-
-
-								<%-- <td><form:input path="dateInstalled" value="${equipment.dateInstalled}"/></td> --%>
-								<!-- </tr>
-			    <tr> -->
-								<td><form:label path="status.statusCode">Status Code:</form:label></td>
-								<td><form:select path="status.statusCode"
-										cssStyle="width: 210px;">
-										<option value="-1">--Select a Status--</option>
-										<c:forEach items="${statuses}" var="status">
-											<option value="${status.statusCode}">${status.statusName}</option>
-										</c:forEach>
-									</form:select></td>
-								<!-- </tr>
-				
-				<tr> -->
-								<td><form:label path="fundingSource.fundingSourceId">Funding Source  ID :</form:label></td>
-								<td><form:select path="fundingSource.fundingSourceId"
-										cssStyle="width: 210px;">
-										<option value="-1">--Select a Funding Source--</option>
-										<c:forEach items="${fundingSources}" var="fundingSource">
-											<option value="${fundingSource.fundingSourceId}">${fundingSource.agencyName}</option>
-										</c:forEach>
-									</form:select></td>
-							</tr>
-							<tr>
-								<td><form:label path="dateFunded">Date Funded:</form:label></td>
-								<td><form:input path="dateFunded" id="dateFunded"
-										type="text" size="25" value="${equipment.dateFunded}" /> <a
-									href="javascript:NewCal('dateFunded','mmddyyyy')"> <img
-										src="<c:url value="/resources/images/cal.gif" />" width="16"
-										height="16" border="0" alt="Pick a date">
-								</a></td>
-								<!--  </tr>
-				
-				<tr> -->
-								<td><form:label path="dateExpired">Date Expired :</form:label></td>
-								<td><form:input path="dateExpired" id="dateExpired"
-										type="text" size="25" value="${equipment.dateExpired}" /> <a
-									href="javascript:NewCal('dateExpired','mmddyyyy')"> <img
-										src="<c:url value="/resources/images/cal.gif" />" width="16"
-										height="16" border="0" alt="Pick a date">
-								</a></td>
-
-								<!--  </tr>
-				
-				<tr> -->
-								<td><form:label path="dateRemoved">Date Removed :</form:label></td>
-								<td><form:input path="dateRemoved" id="dateRemoved"
-										type="text" size="25" value="${equipment.dateRemoved}" /> <a
-									href="javascript:NewCal('dateRemoved','mmddyyyy')"> <img
-										src="<c:url value="/resources/images/cal.gif" />" width="16"
-										height="16" border="0" alt="Pick a date">
-								</a></td>
-
-							</tr>
-							<tr>
-								<td><form:label path="dateCheckedOut">Date Checked Out:</form:label></td>
-								<td><form:input path="dateCheckedOut" id="dateCheckedOut"
-										type="text" size="25" value="${equipment.dateCheckedOut}" /> <a
-									href="javascript:NewCal('dateCheckedOut','mmddyyyy')"> <img
-										src="<c:url value="/resources/images/cal.gif" />" width="16"
-										height="16" border="0" alt="Pick a date">
-								</a></td>
-
-								<!--  </tr>
-				
-				<tr> -->
-								<td><form:label path="dateReturned">Date Returned:</form:label></td>
-								<td><form:input path="dateReturned" id="dateReturned"
-										type="text" size="25" value="${equipment.dateReturned}" /> <a
-									href="javascript:NewCal('dateReturned','mmddyyyy')"> <img
-										src="<c:url value="/resources/images/cal.gif" />" width="16"
-										height="16" border="0" alt="Pick a date">
-								</a></td>
-
-								<!--  </tr>
-				
-				<tr> -->
-								<td><form:label path="currentOwner">Current Owner :</form:label></td>
-								<td><form:input path="currentOwner"
-										value="${equipment.currentOwner}" cssStyle="width: 205px;" /></td>
-							</tr>
-							<tr>
-								<td><form:label path="location.roomId">Room Number:</form:label></td>
-								<td><form:select path="location.roomId"
-										cssStyle="width: 210px;">
-										<option value="-1">--Select a Location--</option>
-										<c:forEach items="${locations}" var="location">
-											<option value="${location.roomId}">${location.roomName}</option>
-										</c:forEach>
-									</form:select></td>
-
-								<!--  </tr>
-				
-				<tr> -->
-								<td><form:label path="purpose">Purpose:</form:label></td>
-								<td><form:input path="purpose" value="${equipment.purpose}"
-										cssStyle="width: 205px;" /></td>
-								<!-- </tr>
-				
-				<tr> -->
-								<td><form:label path="additionalComp">Additional Components:</form:label></td>
-								<td><form:input path="additionalComp"
-										value="${equipment.additionalComp}" cssStyle="width: 205px;" /></td>
-							</tr>
-							<tr>
-								<td><form:label path="notes">Notes :</form:label></td>
-								<td><form:input path="notes" value="${equipment.notes}"
-										cssStyle="width: 205px;" /></td>
-							</tr>
-							<%-- 	<tr> --%>
-							<tr>
-								<td>&nbsp;</td>
-								<td><input type="submit" value="SAVE" /></td>
-							</tr>
-						</table>
-					</form:form>
+					<%-- <form:form method="POST" action="/LEISProject/saveEquipment.html">
+					</form:form> --%>
 				</div>
 				<br />
 			</div>
@@ -407,18 +291,18 @@
 									<th>UCM Inventory Number</th>
 									<th>CIS Inventory Number</th>
 									<th>Date Installed</th>
-									<!-- <th>Status Code</th>
-									<th>Funding Source ID</th> 
+									<th>Status Code</th>
+									<th>Funding Source ID</th>
 									<th>Date Funded</th>
-									<th>Date Expired</th> 
-									<th>Date Removed</th> 
+									<th>Date Expired</th>
+									<th>Date Removed</th>
 									<th>Date Checked Out</th>
 									<th>Date Returned</th>
-									<th>Current Owner</th> -->
+									<th>Current Owner</th>
 									<th>Room Number</th>
-									<!-- <th>Purpose</th>
+									<th>Purpose</th>
 									<th>Additional Components</th>
-									<th>Notes</th> -->
+									<th>Notes</th>
 									<th>Options</th>
 								</tr>
 							</thead>
@@ -434,7 +318,7 @@
 										<td><c:out value="${equipment.ucmInventoryNo}" /></td>
 										<td><c:out value="${equipment.cisInventoryNo}" /></td>
 										<td><c:out value="${equipment.dateInstalled}" /></td>
-										<%-- <td><c:out value="${equipment.status.statusCode}" /></td>
+										<td><c:out value="${equipment.status.statusCode}" /></td>
 										<td><c:out
 												value="${equipment.fundingSource.fundingSourceId}" /></td>
 										<td><c:out value="${equipment.dateFunded}" /></td>
@@ -442,11 +326,11 @@
 										<td><c:out value="${equipment.dateRemoved}" /></td>
 										<td><c:out value="${equipment.dateCheckedOut}" /></td>
 										<td><c:out value="${equipment.dateReturned}" /></td>
-										<td><c:out value="${equipment.currentOwner}" /></td> --%>
+										<td><c:out value="${equipment.currentOwner}" /></td>
 										<td><c:out value="${equipment.location.roomId}" /></td>
-										<%-- <td><c:out value="${equipment.purpose}" /></td>
+										<td><c:out value="${equipment.purpose}" /></td>
 										<td><c:out value="${equipment.additionalComp}" /></td>
-										<td><c:out value="${equipment.notes}" /></td> --%>
+										<td><c:out value="${equipment.notes}" /></td>
 										<td><a
 											href="editEquipment.html?equipmentId=${equipment.equipmentId}">Edit</a>
 											| <a
@@ -457,6 +341,9 @@
 						</table>
 					</div>
 
+				</c:if>
+
+				<br />
 					<div>
 <b><font color="#800000">Show/Hide Column:</font>
 <a href="#" class="toggle-vis" data-column="0" style="color: indigo; text-decoration:none;">Equipment Id</a> - 
@@ -467,7 +354,7 @@
 <a href="#" class="toggle-vis" data-column="5" style="color: indigo; text-decoration:none;">UCM Inventory Number</a>
 <a href="#" class="toggle-vis" data-column="6" style="color: indigo; text-decoration:none;">CIS Inventory Number</a> - 
 <a href="#" class="toggle-vis" data-column="7" style="color: indigo; text-decoration:none;">Date Installed</a> - 
-<a href="#" class="toggle-vis" data-column="16" style="color: indigo; text-decoration:none;">Status Code</a> - 
+<a href="#" class="toggle-vis" data-column="8" style="color: indigo; text-decoration:none;">Status Code</a> - 
 <a href="#" class="toggle-vis" data-column="9" style="color: indigo; text-decoration:none;">Funding Source ID</a> - 
 <a href="#" class="toggle-vis" data-column="10" style="color: indigo; text-decoration:none;">Date Funded</a> - 
 <a href="#" class="toggle-vis" data-column="11" style="color: indigo; text-decoration:none;">Date Expired</a> - 
@@ -475,16 +362,12 @@
 <a href="#" class="toggle-vis" data-column="13" style="color: indigo; text-decoration:none;">Date Checked Out</a> - 
 <a href="#" class="toggle-vis" data-column="14" style="color: indigo; text-decoration:none;">Date Returned</a> - 
 <a href="#" class="toggle-vis" data-column="15" style="color: indigo; text-decoration:none;">Current Owner</a> - 
-<a href="#" class="toggle-vis" data-column="8" style="color: indigo; text-decoration:none;">Room Number</a> - 
+<a href="#" class="toggle-vis" data-column="16" style="color: indigo; text-decoration:none;">Room Number</a> - 
 <a href="#" class="toggle-vis" data-column="17" style="color: indigo; text-decoration:none;">Purpose</a> - 
 <a href="#" class="toggle-vis" data-column="18" style="color: indigo; text-decoration:none;">Additional Components</a> - 
 <a href="#" class="toggle-vis" data-column="19" style="color: indigo; text-decoration:none;">Notes</a>
 </b>
 				</div>
-				</c:if>
-
-				<br />
-
 				<br />
 				<br />
 		

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,14 +27,14 @@ public class LocationController {
 	
 	@RequestMapping(value = "/saveLocation", method = RequestMethod.POST)
 	public ModelAndView saveLocation(@ModelAttribute("command") Location location, 
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		locationService.addLocation(location);
 		return new ModelAndView("redirect:/addLocation.html");
 	}
 	
 	@RequestMapping(value = "/addLocation", method = RequestMethod.GET)
 	public ModelAndView addLocation(@ModelAttribute("command")  Location location,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("locations",  locationService.getLocations());
 		return new ModelAndView("addLocation", model);
@@ -40,7 +42,7 @@ public class LocationController {
 	
 	@RequestMapping(value = "/deleteLocation", method = RequestMethod.GET)
 	public ModelAndView deleteLocation(@ModelAttribute("command")  Location location,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		locationService.deleteLocation(location.getRoomId());
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("locations",  locationService.getLocations());
@@ -49,7 +51,7 @@ public class LocationController {
 	
 	@RequestMapping(value = "/editLocation", method = RequestMethod.GET)
 	public ModelAndView editLocation(@ModelAttribute("command")  Location location,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("location",  locationService.getLocation(location.getRoomId()));
 		model.put("locations",  locationService.getLocations());

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -24,14 +26,14 @@ public class FundingSourceController {
 	
 	@RequestMapping(value = "/saveFundingSource", method = RequestMethod.POST)
 	public ModelAndView saveFundingSource(@ModelAttribute("command") FundingSource fundingSource, 
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		fundingSourceService.addFundingSource(fundingSource);
 		return new ModelAndView("redirect:/addFundingSource.html");
 	}
 	
 	@RequestMapping(value = "/addFundingSource", method = RequestMethod.GET)
 	public ModelAndView addFundingSource(@ModelAttribute("command")  FundingSource fundingSource,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("fundingSources",  fundingSourceService.getFundingSources());
 		return new ModelAndView("addFundingSource", model);
@@ -39,7 +41,7 @@ public class FundingSourceController {
 	
 	@RequestMapping(value = "/deleteFundingSource", method = RequestMethod.GET)
 	public ModelAndView deleteFundingSource(@ModelAttribute("command")  FundingSource fundingSource,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		fundingSourceService.deleteFundingSource(fundingSource.getFundingSourceId());
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("fundingSources",  fundingSourceService.getFundingSources());
@@ -48,7 +50,7 @@ public class FundingSourceController {
 	
 	@RequestMapping(value = "/editFundingSource", method = RequestMethod.GET)
 	public ModelAndView editFundingSource(@ModelAttribute("command")  FundingSource fundingSource,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("fundingSource",  fundingSourceService.getFundingSource(fundingSource.getFundingSourceId()));
 		model.put("fundingSources",  fundingSourceService.getFundingSources());

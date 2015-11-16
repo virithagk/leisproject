@@ -5,73 +5,127 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="equipment")
+@Table(name = "equipment")
 public class Equipment {
 
 	@Id
-	@Column(name="EQUIPMENT_ID")
+	@Column(name = "EQUIPMENT_ID")
 	private int equipmentId;
+
+	@OneToOne
+	@JoinColumn(name = "MF_ID")
+	private Manufacturer manufacturer;
+
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "TYPE_CODE")
+	private EquipmentType equipmentType;
+
+	public EquipmentType getEquipmentType() {
+		return equipmentType;
+	}
+
+	public void setEquipmentType(EquipmentType equipmentType) {
+		this.equipmentType = equipmentType;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "MD_CODE")
+	private Model model;
+
+	public Model getModel() {
+		return model;
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "STATUS_CODE")
+	private Status status;
 	
-	@Column(name="MF_ID")
-	private int manufacturerId;
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 	
-	@Column(name="TYPE_CODE")
-	private int typeCode;
-	
-	@Column(name="MD_CODE")
-	private int modelCode;
-	
-	@Column(name="SERIAL_NO")
-	private int serialNumber;
-	
-	@Column(name="UCM_INV_NO")
-	private int ucmInventoryNo;
-	
-	@Column(name="CIS_INV_NO")
-	private int cisInventoryNo;
-	
-	@Column(name="FS_ID")
-	private int fundingId;
-	
-	@Column(name="STATUS_CODE")
-	private int statusCode;
-	
-	@Column(name="ROOM_ID")
-	private int roomId;
-	
-	@Column(name="DATE_INSTALLED")
+	@OneToOne
+	@JoinColumn(name = "FS_ID")
+	private FundingSource fundingSource;
+
+	public FundingSource getFundingSource() {
+		return fundingSource;
+	}
+
+	public void setFundingSource(FundingSource fundingSource) {
+		this.fundingSource = fundingSource;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "ROOM_ID")
+	private Location location;
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	@Column(name = "SERIAL_NO")
+	private String serialNumber;
+
+	@Column(name = "UCM_INV_NO")
+	private String ucmInventoryNo;
+
+	@Column(name = "CIS_INV_NO")
+	private String cisInventoryNo;
+
+	@Column(name = "DATE_INSTALLED")
 	private Date dateInstalled;
-	
-	@Column(name="DATE_FUNDED")
+
+	@Column(name = "DATE_FUNDED")
 	private Date dateFunded;
-	
-	@Column(name="DATE_WARRANTY_EXPIRY")
+
+	@Column(name = "DATE_WARRANTY_EXPIRY")
 	private Date dateExpired;
-	
-	@Column(name="DATE_REMOVED")
+
+	@Column(name = "DATE_REMOVED")
 	private Date dateRemoved;
-	
-	@Column(name="DATE_CHECKED_OUT")
+
+	@Column(name = "DATE_CHECKED_OUT")
 	private Date dateCheckedOut;
-	
-	@Column(name="DATE_OF_RETURN")
+
+	@Column(name = "DATE_OF_RETURN")
 	private Date dateReturned;
-	
-	@Column(name="CURRENT_OWNER")
+
+	@Column(name = "CURRENT_OWNER")
 	private String currentOwner;
-	
-	@Column(name="PURPOSE")
+
+	@Column(name = "PURPOSE")
 	private String purpose;
-	
-	@Column(name="ADDN_COMP")
+
+	@Column(name = "ADDN_COMP")
 	private String additionalComp;
-	
-	@Column(name="NOTES")
+
+	@Column(name = "NOTES")
 	private String notes;
 
 	public int getEquipmentId() {
@@ -82,83 +136,41 @@ public class Equipment {
 		this.equipmentId = equipmentId;
 	}
 
-	public int getManufacturerId() {
-		return manufacturerId;
-	}
-
-	public void setManufacturerId(int manufacturerId) {
-		this.manufacturerId = manufacturerId;
-	}
-
-	public int getTypeCode() {
-		return typeCode;
-	}
-
-	public void setTypeCode(int typeCode) {
-		this.typeCode = typeCode;
-	}
-
-	public int getModelCode() {
-		return modelCode;
-	}
-
-	public void setModelCode(int modelCode) {
-		this.modelCode = modelCode;
-	}
-
-	public int getSerialNumber() {
+	public String getSerialNumber() {
 		return serialNumber;
 	}
 
-	public void setSerialNumber(int serialNumber) {
+	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
 
-	public int getUcmInventoryNo() {
+	public String getUcmInventoryNo() {
 		return ucmInventoryNo;
 	}
 
-	public void setUcmInventoryNo(int ucmInventoryNo) {
+	public void setUcmInventoryNo(String ucmInventoryNo) {
 		this.ucmInventoryNo = ucmInventoryNo;
 	}
 
-	public int getCisInventoryNo() {
+	public String getCisInventoryNo() {
 		return cisInventoryNo;
 	}
 
-	public void setCisInventoryNo(int cisInventoryNo) {
+	public void setCisInventoryNo(String cisInventoryNo) {
 		this.cisInventoryNo = cisInventoryNo;
-	}
-
-	public int getFundingId() {
-		return fundingId;
-	}
-
-	public void setFundingId(int fundingId) {
-		this.fundingId = fundingId;
-	}
-
-	public int getStatusCode() {
-		return statusCode;
-	}
-
-	public void setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-	}
-
-	public int getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(int roomId) {
-		this.roomId = roomId;
 	}
 
 	public Date getDateInstalled() {
 		return dateInstalled;
 	}
 
-	public void setDateInstalled(Date dateInstalled) {
+	public void setDateInstalled(Date dateInstalled)  {
+		
+		//DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		/*DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+		java.util.Date myDate = formatter.parse(dateInstalled.toString());
+		java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());*/
+		
 		this.dateInstalled = dateInstalled;
 	}
 
@@ -233,8 +245,4 @@ public class Equipment {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
-
-	
-	
 }
